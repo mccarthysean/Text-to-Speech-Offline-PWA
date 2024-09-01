@@ -17,7 +17,7 @@ services:
       - ..:/workspace:cached
     ports:
       # Dev server running in VS Code uses 5000,
-      # and the site can be accessed from 5001 outside the container
+      # and the site can be accessed from 5002 outside the container
       # Forwards port 5002 from the Docker host (e.g. Windows desktop) to the dev environment container's port 5000
       - 5002:5000
     # Overrides default command so things don't shut down after the process ends.

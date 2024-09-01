@@ -1,13 +1,6 @@
 # -*- encoding: utf-8 -*-
 import multiprocessing
 
-# if os.getenv("FLASK_ENV", "production") in ("testing", "staging"):
-#     # For the staging site we use a different port
-#     print("Gunicorn using port 5006 for testing or staging")
-#     bind = "0.0.0.0:5006"
-# else:
-#     # Default port
-#     print("Gunicorn using port 5000 for production")
 bind = "0.0.0.0:5000"
 
 # The Access log file to write to, same as --access-logfile

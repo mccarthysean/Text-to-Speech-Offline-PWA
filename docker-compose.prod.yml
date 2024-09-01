@@ -11,6 +11,9 @@ services:
       FLASK_RUN_HOST: "0.0.0.0"
     networks:
       - traefik-public
+    ports:
+      # Forwards port 5000 from the Docker host (e.g. Windows desktop) to the prod environment container's port 5000
+      - 5000:5000
     deploy:
       mode: replicated
       replicas: 1

@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>Text to Speech PWA</title>
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-</head>
-<body>
-    <div class="container">
-        <textarea id="textInput" placeholder="Type something..."></textarea>
-        <div class="buttons" style="margin-bottom: 3rem;">
-            <button id="playButton">Play</button>
-            <button id="clearButton">Clear</button>
-        </div>
-        <button id="installButton" style="display: none;">Install App</button>
-    </div>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register("{{ url_for('static', filename='js/service-worker.js') }}")
-                .then(registration => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch(error => {
-                    console.error('Service Worker registration failed:', error);
-                });
-        }
-    </script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>Text to Speech App</title>
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Text to Speech PWA</h1>
+    <label for="text">Enter text:</label>
+    <textarea id="textInput" placeholder="Type something..."></textarea>
+    <label for="voice">Select voice:</label>
+    <select id="voice" name="voice"></select>
+
+    <div class="buttons" style="margin-bottom: 3rem;">
+      <button id="playButton">Play</button>
+      <button id="clearButton">Clear</button>
+    </div>
+    
+    <button id="installButton" style="display: none;">Install App</button>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register("{{ url_for('static', filename='js/service-worker.js') }}")
+        .then(registration => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+          console.error('Service Worker registration failed:', error);
+        });
+    }
+  </script>
 </body>
+
 </html>

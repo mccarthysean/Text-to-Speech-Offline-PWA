@@ -11,9 +11,9 @@ services:
       FLASK_RUN_HOST: "0.0.0.0"
     networks:
       - traefik-public
-    ports:
-      # Forwards port 5000 from the Docker host (e.g. Windows desktop) to the prod environment container's port 5000
-      - 5000:5000
+    # ports:
+    #   # Forwards port 5000 from the Docker host (e.g. Windows desktop) to the prod environment container's port 5000
+    #   - 5000:5000
     deploy:
       mode: replicated
       replicas: 1
@@ -72,7 +72,7 @@ services:
       # Command to check if the container is running, for zero-downtime deployment.
       # If the website is fine, curl returns a return code of 0 and deployment continues.
       # Make this long so it's not constantly killing containers when the site is slow
-      test: ["CMD", "curl", "--fail", "--connect-timeout", "120", "--max-time", "300", "http://localhost:5000/healthcheck"]
+      test: ["CMD", "curl", "--fail", "--connect-timeout", "120", "--max-time", "300", "http://localhost:5000"]
       interval: 120s # starts x seconds after container starts, then again every x seconds
       timeout: 320s # if check takes longer than "timeout", it fails
       retries: 2 # It takes "retries" consecutive failures of the health check for the container to be considered unhealthy

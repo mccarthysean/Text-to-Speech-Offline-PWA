@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: production
       cache_from:
         - "$TEXT_TO_SPEECH_IMAGE_PROD_FINAL"
       args:

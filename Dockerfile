@@ -2,6 +2,8 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y curl inetutils-ping
+
 COPY requirements.prod.txt gunicorn_config.py wsgi.py ./
 RUN pip install -r requirements.prod.txt
 

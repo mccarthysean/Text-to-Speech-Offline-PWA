@@ -6,6 +6,42 @@ const rateInput = document.getElementById("rateInput");
 const rateOutput = document.getElementById("rateOutput");
 let voices = [];
 
+function loadVoices() {
+  voices = synth.getVoices();
+  let defaultVoiceIndex = 0;
+
+  for (let i = 0; i < voices.length; i++) {
+    const option = document.createElement("option");
+    option.textContent = `${voices[i].name} (${voices[i].lang})`;
+    option.value = i;
+
+    // Check if the voice is "Google UK English Male"
+    if (
+      voices[i].name === "Google UK English Male" &&
+      voices[i].lang === "en-GB"
+    ) {
+      defaultVoiceIndex = i + 1;
+    }
+
+    voiceSelect.appendChild(option);
+  }
+
+  // Set the default selected voice to Google UK English Male
+  voiceSelect.selectedIndex = defaultVoiceIndex;
+}
+
+// checks if synth.onvoiceschanged is defined (which means it's supported),
+// and sets loadVoices as the event handler. If onvoiceschanged is not supported,
+// it directly calls loadVoices.
+document.addEventListener("DOMContentLoaded", function () {
+  if (synth.onvoiceschanged !== undefined) {
+    synth.onvoiceschanged = loadVoices;
+  } else {
+    loadVoices();
+  }
+});
+
+
 playButton.addEventListener("click", () => {
   const text = document.getElementById("textInput").value;
   const utterThis = new SpeechSynthesisUtterance(text);
@@ -46,33 +82,3 @@ window.addEventListener("beforeinstallprompt", (e) => {
     });
   });
 });
-
-function loadVoices() {
-  voices = synth.getVoices();
-  let defaultVoiceIndex = 0;
-
-  for (let i = 0; i < voices.length; i++) {
-    const option = document.createElement("option");
-    option.textContent = `${voices[i].name} (${voices[i].lang})`;
-    option.value = i;
-
-    // Check if the voice is "Google UK English Male"
-    if (
-      voices[i].name === "Google UK English Male" &&
-      voices[i].lang === "en-GB"
-    ) {
-      defaultVoiceIndex = i + 1;
-    }
-
-    voiceSelect.appendChild(option);
-  }
-
-  // Set the default selected voice to Google UK English Male
-  voiceSelect.selectedIndex = defaultVoiceIndex;
-}
-
-if (synth.onvoiceschanged !== undefined) {
-  synth.onvoiceschanged = loadVoices;
-} else {
-  loadVoices();
-}

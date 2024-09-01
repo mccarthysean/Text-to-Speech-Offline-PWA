@@ -47,31 +47,31 @@ window.addEventListener("beforeinstallprompt", (e) => {
   });
 });
 
-function loadVoices() {
-  voices = synth.getVoices();
-  let defaultVoiceIndex = 0;
+// function loadVoices() {
+//   voices = synth.getVoices();
+//   let defaultVoiceIndex = 0;
 
-  for (let i = 0; i < voices.length; i++) {
-    const option = document.createElement("option");
-    option.textContent = `${voices[i].name} (${voices[i].lang})`;
-    option.value = i;
+//   for (let i = 0; i < voices.length; i++) {
+//     const option = document.createElement("option");
+//     option.textContent = `${voices[i].name} (${voices[i].lang})`;
+//     option.value = i;
 
-    // Check if the voice is "Google UK English Male"
-    if (
-      voices[i].name === "Google UK English Male" &&
-      voices[i].lang === "en-GB"
-    ) {
-      defaultVoiceIndex = i + 1;
-    }
+//     // Check if the voice is "Google UK English Male"
+//     if (
+//       voices[i].name === "Google UK English Male" &&
+//       voices[i].lang === "en-GB"
+//     ) {
+//       defaultVoiceIndex = i + 1;
+//     }
 
-    voiceSelect.appendChild(option);
-  }
+//     voiceSelect.appendChild(option);
+//   }
 
-  // Set the default selected voice to Google UK English Male
-  voiceSelect.selectedIndex = defaultVoiceIndex;
-}
+//   // Set the default selected voice to Google UK English Male
+//   voiceSelect.selectedIndex = defaultVoiceIndex;
+// }
 
-loadVoices();
-if (synth.onvoiceschanged !== undefined) {
-  synth.onvoiceschanged = loadVoices;
-}
+// loadVoices();
+// if (synth.onvoiceschanged !== undefined) {
+//   synth.onvoiceschanged = loadVoices;
+// }

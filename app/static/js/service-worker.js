@@ -4,7 +4,6 @@ const urlsToCache = [
   "/static/css/bootstrap.min.css",
   "/static/css/style.css",
   "/static/js/script.js",
-  "/static/js/service-worker-init.js",
   "/static/images/icons/icon-192x192.png",
   "/static/images/icons/icon-512x512.png",
   "/static/images/icons/favicons/favicon.ico",

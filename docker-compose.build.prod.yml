@@ -4,7 +4,7 @@ services:
   text_to_speech:
     build:
       context: .
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile
       target: production
       cache_from:
         - "$TEXT_TO_SPEECH_IMAGE_PROD_FINAL"

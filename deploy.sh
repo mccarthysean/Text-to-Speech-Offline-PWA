@@ -3,6 +3,20 @@
 # Ensure that the script exits if any command fails
 set -e
 
+# display only the name of the current branch you're on
+echo "Checking the current branch..."
+git rev-parse --abbrev-ref HEAD
+
+echo "Fetching the latest changes..."
+git fetch
+
+echo "Checking out the 'main' branch..."
+git checkout main
+
+echo "Pulling the latest changes..."
+git pull
+
+
 # Set variable names from .env file
 export $(cat .env | grep -v "^#" | xargs)
 

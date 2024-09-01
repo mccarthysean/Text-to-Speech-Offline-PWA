@@ -71,8 +71,7 @@ function loadVoices() {
   voiceSelect.selectedIndex = defaultVoiceIndex;
 }
 
+loadVoices();
 if (synth.onvoiceschanged !== undefined) {
   synth.onvoiceschanged = loadVoices;
-} else {
-  loadVoices();
 }

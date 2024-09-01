@@ -8,9 +8,12 @@
 
   <!-- Favicon Icons -->
   <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/icons/favicons/apple-touch-icon.png') }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/icons/favicons/favicon-32x32.png') }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/icons/favicons/favicon-16x16.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="{{ url_for('static', filename='images/icons/favicons/apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32"
+    href="{{ url_for('static', filename='images/icons/favicons/favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16"
+    href="{{ url_for('static', filename='images/icons/favicons/favicon-16x16.png') }}">
   <link rel="icon" href="{{ url_for('static', filename='images/icons/favicons/favicon.ico') }}">
 
   <!-- App Icons -->
@@ -26,50 +29,61 @@
 </head>
 
 <body>
-  <div class="container py-5">
+  <div class="container py-4">
     <h1 class="text-center mb-4">Text to Speech</h1>
 
-    <div class="mb-3">
-      <textarea class="form-control" id="textInput" rows="4" placeholder="Type something..."></textarea>
+    <div class="row mt-4">
+      <div class="col">
+        <textarea class="form-control" id="textInput" rows="4" placeholder="Type something..."></textarea>
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label for="rateInput" class="form-label">Rate:</label>
-      <input type="range" class="form-range" id="rateInput" name="rate" min="0.5" max="1.5" value="1" step="0.5">
-      <output id="rateOutput" class="form-text">1</output>
+    <div class="row mt-4 d-flex justify-content-center">
+      <div class="col-auto">
+        <button id="playButton" class="btn btn-primary me-2">Play</button>
+        <button id="clearButton" class="btn btn-secondary">Clear</button>
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label for="voiceSelect" class="form-label">Select voice:</label>
-      <select class="form-select" id="voiceSelect" name="voice">
-        <option selected>Select a voice</option>
-        <!-- Voice options will be dynamically populated -->
-      </select>
+    <div class="row mt-4 d-flex justify-content-center">
+      <div class="col-auto">
+        <button id="installButton" class="btn btn-success" style="display: none;">Install App</button>
+      </div>
     </div>
 
-    <div class="d-flex">
-      <button id="playButton" class="btn btn-primary me-2">Play</button>
-      <button id="clearButton" class="btn btn-secondary">Clear</button>
+    <div class="row mt-4">
+      <div class="col">
+        <label for="voiceSelect" class="form-label">Preferred Voice:</label>
+        <select class="form-select" id="voiceSelect" name="voice">
+          <option selected>Select a voice</option>
+          <!-- Voice options will be dynamically populated -->
+        </select>
+      </div>
     </div>
 
-    <button id="installButton" class="btn btn-success mt-3" style="display: none;">Install App</button>
-  </div>
+    <div class="row mt-4 justify-content-center">
+      <div class="col-8">
+        <label for="rateInput" class="form-label">Reading Speed:</label>
+        <input type="range" class="form-range" id="rateInput" name="rate" min="0.5" max="1.5" value="1" step="0.5">
+        <output id="rateOutput" class="form-text">1</output>
+      </div>
+    </div>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register(
-          "{{ url_for('static', filename='js/service-worker.js') }}"
-        )
-        .then((registration) => {
-          console.log("Service Worker registered with scope:", registration.scope);
-        })
-        .catch((error) => {
-          console.error("Service Worker registration failed:", error);
-        });
-    }
-  </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register(
+            "{{ url_for('static', filename='js/service-worker.js') }}"
+          )
+          .then((registration) => {
+            console.log("Service Worker registered with scope:", registration.scope);
+          })
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
+          });
+      }
+    </script>
 </body>
 
 </html>

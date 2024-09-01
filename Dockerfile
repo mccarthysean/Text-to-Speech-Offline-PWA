@@ -2,7 +2,7 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY requirements.prod.txt requirements.prod.txt
+COPY requirements.prod.txt gunicorn_config.py wsgi.py ./
 RUN pip install -r requirements.prod.txt
 
 COPY . .

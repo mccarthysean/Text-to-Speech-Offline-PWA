@@ -1,0 +1,86 @@
+services:
+  text_to_speech:
+    image: "$TEXT_TO_SPEECH_IMAGE_PROD_FINAL"
+    env_file: .env
+    environment:
+      FLASK_CONFIG: production
+      FLASK_ENV: production
+      FLASK_DEBUG: 0
+      FLASK_APP: wsgi.py
+      FLASK_RUN_PORT: 5000
+      FLASK_RUN_HOST: "0.0.0.0"
+    networks:
+      - traefik-public
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role != manager
+          - node.platform.os == linux
+      update_config:
+        # parallelism = the number of containers to update at a time
+        # (old ones won't be shut down until new ones are up and healthy)
+        parallelism: 1
+        # start-first = new task is started first, and the running tasks briefly overlap
+        order: start-first
+        # What to do if an update fails
+        failure_action: rollback
+        # time to wait between updating a group of containers
+        delay: 1s
+      rollback_config:
+        # If parallelism set to 0, all containers rollback simultaneously
+        parallelism: 0
+        # stop-first = old task is stopped before starting new one
+        # start-first = new task is started first, and the running tasks briefly overlap
+        order: start-first
+      # Don't use a restart_policy. Best to let swarm mode recreate a new container, possibly on another host
+      restart_policy:
+        condition: any
+      labels:
+        # Ensure Traefik sees it and does Letsencrypt for HTTPS
+        - traefik.enable=true
+        # Must be on traefik-public overlay Docker Swarm network
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        # HTTP (port 80)
+        # Hosts that this container should be reachable at.
+        - traefik.http.routers.text_to_speech-http.rule=Host(`speak.myijack.com`)
+        # This router is for non-TLS traffic, so it should use the "http" service
+        - traefik.http.routers.text_to_speech-http.entrypoints=http
+        # Use the middleware "https-redirect" to redirect all HTTP requests to HTTPS
+        - traefik.http.routers.text_to_speech-http.middlewares=https-redirect
+        # Also use the Traefik-defined middleware "redirects" to use regex to read and alter the Host header
+        - traefik.http.routers.text_to_speech-http.middlewares=redirects
+        # HTTPS (port 443)
+        # Hosts that this container should be reachable at.
+        - traefik.http.routers.text_to_speech-https.rule=Host(`speak.myijack.com`)
+        # This router is for TLS traffic, so it should use the "https" service
+        - traefik.http.routers.text_to_speech-https.entrypoints=https
+        # This router uses TLS and needs a certresolver to perform SNI
+        - traefik.http.routers.text_to_speech-https.tls=true
+        # Use the "le" (Let's Encrypt) certresolver
+        - traefik.http.routers.text_to_speech-https.tls.certresolver=le
+        # Also use the Traefik-defined middleware "redirects" to use regex to read and alter the Host header
+        - traefik.http.routers.text_to_speech-https.middlewares=redirects
+        # The loadbalancer.server.port is the port INSIDE the container
+        - traefik.http.services.text_to_speech.loadbalancer.server.port=5000
+    healthcheck:
+      # Command to check if the container is running, for zero-downtime deployment.
+      # If the website is fine, curl returns a return code of 0 and deployment continues.
+      # Make this long so it's not constantly killing containers when the site is slow
+      test: ["CMD", "curl", "--fail", "--connect-timeout", "120", "--max-time", "300", "http://localhost:5000/healthcheck"]
+      interval: 120s # starts x seconds after container starts, then again every x seconds
+      timeout: 320s # if check takes longer than "timeout", it fails
+      retries: 2 # It takes "retries" consecutive failures of the health check for the container to be considered unhealthy
+      # "start_period" provides initialization time for containers that need time to bootstrap.
+      # Probe failure during that period will not be counted towards the maximum number of retries.
+      # However, if a health check succeeds during the start period, the container is considered started and all
+      # consecutive failures will be counted towards the maximum number of retries
+      start_period: 60s
+
+networks:
+  # Use the previously created public network "traefik-public", shared with other
+  # services that need to be publicly available via this Traefik
+  traefik-public:
+    external: true

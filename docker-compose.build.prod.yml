@@ -1,0 +1,19 @@
+# CI stage: prod
+# Dockerfile build stage: final
+services:
+  text_to_speech:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      target: production
+      cache_from:
+        - "$TEXT_TO_SPEECH_IMAGE_PROD_FINAL"
+      args:
+        ENVIRONMENT: production
+        # Use Docker BuildKit for better caching and faster builds
+        DOCKER_BUILDKIT: 1
+        BUILDKIT_INLINE_CACHE: 1
+        COMPOSE_DOCKER_CLI_BUILD: 1
+        # ERROR: OpenBLAS blas_thread_init if you upgrade from Debian bullseye to bookworm...
+        INSTALL_PYTHON_VERSION: 3.12-slim-bullseye
+    image: "$TEXT_TO_SPEECH_IMAGE_PROD_FINAL"

@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "text-to-speech-offline-pwa"
+version = "0.1.0"
+description = "A simple text-to-speech progressive web app (PWA) that can be installed on a phone and run offline without an internet connection, for people who can type, but have trouble speaking"
+authors = ["Sean McCarthy <sean.mccarthy@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask = "^3.0.3"
+gunicorn = "^23.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+poetry = "^1.8.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

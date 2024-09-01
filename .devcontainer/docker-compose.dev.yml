@@ -1,0 +1,25 @@
+services:
+  text_to_speech_dev:
+    build:
+      # context: where should docker compose look for the Dockerfile?
+      # i.e. either a path to a directory containing a Dockerfile, or a url to a git repository
+      context: ..
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      DOCKER_BUILDKIT: 1
+      COMPOSE_DOCKER_CLI_BUILD: 1
+      BUILDKIT_INLINE_CACHE: 1
+      FLASK_CONFIG: development
+      FLASK_ENV: development
+    volumes:
+      - ..:/workspace:cached
+    ports:
+      # Dev server running in VS Code uses 5000,
+      # and the site can be accessed from 5001 outside the container
+      # Forwards port 5002 from the Docker host (e.g. Windows desktop) to the dev environment container's port 5000
+      - 5002:5000
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+    

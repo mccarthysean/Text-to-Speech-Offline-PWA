@@ -1,0 +1,36 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at
+// https://github.com/microsoft/vscode-dev-containers/tree/master/containers/python-3-miniconda
+{
+  "name": "Text-to-Speech Dev Container",
+  // Use either the Dockerfile or docker-compose.yml to create the Docker container
+  // "dockerFile": "Dockerfile",
+  "dockerComposeFile": "docker-compose.dev.yml",
+  "service": "text_to_speech_dev",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "remote.extensionKind": {
+          "ms-azuretools.vscode-docker": "workspace"
+        },
+        "git.enableSmartCommit": true,
+        "git.autofetch": true
+      },
+      "extensions": [
+        "ms-python.python",
+        "GitHub.copilot",
+        "ms-azuretools.vscode-docker",
+        "dbaeumer.vscode-eslint",
+        "samuelcolvin.jinjahtml",
+        "ms-toolsai.jupyter",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "oderwat.indent-rainbow",
+        "tamasfe.even-better-toml",
+        "esbenp.prettier-vscode",
+        "PWABuilder.pwa-studio",
+        "ms-toolsai.datawrangler"
+      ]
+    }
+  }
+}

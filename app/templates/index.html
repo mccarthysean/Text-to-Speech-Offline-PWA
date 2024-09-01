@@ -5,36 +5,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#000000">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <title>Text to Speech App</title>
   <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <link rel="icon" href="{{ url_for('static', filename='images/icons/favicons/favicon.ico') }}">
 </head>
 
 <body>
-  <div class="container">
-    <h1>Text to Speech PWA</h1>
-    <label for="text">Enter text:</label>
-    <textarea id="textInput" placeholder="Type something..."></textarea>
-    <label for="voice">Select voice:</label>
-    <select id="voice" name="voice"></select>
+  <div class="container py-5">
+    <h1 class="text-center mb-4">Text to Speech</h1>
 
-    <div class="buttons" style="margin-bottom: 3rem;">
-      <button id="playButton">Play</button>
-      <button id="clearButton">Clear</button>
+    <div class="mb-3">
+      <textarea class="form-control" id="textInput" rows="4" placeholder="Type something..."></textarea>
     </div>
-    
-    <button id="installButton" style="display: none;">Install App</button>
+
+    <div class="mb-3">
+      <label for="rateInput" class="form-label">Rate:</label>
+      <input type="range" class="form-range" id="rateInput" name="rate" min="0.5" max="1.5" value="1" step="0.5">
+      <output id="rateOutput" class="form-text">1</output>
+    </div>
+
+    <div class="mb-3">
+      <label for="voiceSelect" class="form-label">Select voice:</label>
+      <select class="form-select" id="voiceSelect" name="voice">
+        <option selected>Select a voice</option>
+        <!-- Voice options will be dynamically populated -->
+      </select>
+    </div>
+
+    <div class="d-flex">
+      <button id="playButton" class="btn btn-primary me-2">Play</button>
+      <button id="clearButton" class="btn btn-secondary">Clear</button>
+    </div>
+
+    <button id="installButton" class="btn btn-success mt-3" style="display: none;">Install App</button>
   </div>
 
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register("{{ url_for('static', filename='js/service-worker.js') }}")
-        .then(registration => {
-          console.log('Service Worker registered with scope:', registration.scope);
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register(
+          "{{ url_for('static', filename='js/service-worker.js') }}"
+        )
+        .then((registration) => {
+          console.log("Service Worker registered with scope:", registration.scope);
         })
-        .catch(error => {
-          console.error('Service Worker registration failed:', error);
+        .catch((error) => {
+          console.error("Service Worker registration failed:", error);
         });
     }
   </script>

@@ -1,20 +1,27 @@
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open('pwa-cache').then(cache => {
-            return cache.addAll([
-                '/',
-                '/static/css/style.css',
-                '/static/js/script.js',
-                '/static/js/service-worker.js'
-            ]);
-        })
-    );
+const CACHE_NAME = "text-to-speech-cache-v1";
+const urlsToCache = [
+  "/",
+  "/static/css/bootstrap.min.css",
+  "/static/css/style.css",
+  "/static/js/script.js",
+  "/static/js/service-worker-init.js",
+  "/static/images/icons/icon-192x192.png",
+  "/static/images/icons/icon-512x512.png",
+  "/static/images/icons/favicons/favicon.ico",
+];
+
+self.addEventListener("install", function (event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function (cache) {
+      return cache.addAll(urlsToCache);
+    })
+  );
 });
 
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request).then(response => {
-            return response || fetch(event.request);
-        })
-    );
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
 });

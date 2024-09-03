@@ -34,10 +34,10 @@ function updateRateOutput(rateValue) {
 
   if (rateValue === "0.7") {
     rateText = "Slow";
-    rateClass = "text-left";
+    rateClass = "text-start";
   } else if (rateValue === "1.3") {
     rateText = "Fast";
-    rateClass = "text-right";
+    rateClass = "text-end";
   }
 
   rateOutput.textContent = rateText;

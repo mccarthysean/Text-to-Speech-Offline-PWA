@@ -80,7 +80,8 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
 // Load voices and populate the select element
 function loadVoices() {
-  const voices = synth.getVoices();
+  // This is a global variable
+  voices = synth.getVoices();
 
   // Remove all existing options
   voiceSelect.innerHTML = "";

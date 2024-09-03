@@ -1,4 +1,4 @@
-const CACHE_NAME = "text-to-speech-cache-v1";
+const CACHE_NAME = "text-to-speech-cache-v2";
 const urlsToCache = [
   "/",
   "/static/css/bootstrap.min.css",

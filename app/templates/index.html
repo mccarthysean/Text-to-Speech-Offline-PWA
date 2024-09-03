@@ -45,49 +45,28 @@
       </div>
     </div>
 
-    <div class="row mt-4 d-flex justify-content-center">
-      <div class="col-auto">
-        <button id="installButton" class="btn btn-success" style="display: none;">Install App</button>
+    <div class="row mt-4 d-flex justify-content-center" id="installButtonRow" style="display: none;">
+      <div class="col-auto text-center">
+        <div><button id="installButton" class="btn btn-success">Install App</button></div>
+        <div class="form-text text-muted">
+          Use the app offline without an internet connection</div>
       </div>
     </div>
 
-    <div class="row mt-4">
-      <div class="col">
+    <div class="row mt-4 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-6">
         <label for="voiceSelect" class="form-label">Preferred Voice:</label>
         <select class="form-select" id="voiceSelect" name="voice">
-          <option value="0">Microsoft David - English (United States) (en-US)</option>
-          <option value="1">Microsoft Richard - English (Canada) (en-CA)</option>
-          <option value="2">Microsoft Linda - English (Canada) (en-CA)</option>
-          <option value="3">Microsoft Mark - English (United States) (en-US)</option>
-          <option value="4">Microsoft Zira - English (United States) (en-US)</option>
-          <option value="5">Google Deutsch (de-DE)</option>
-          <option value="6">Google US English (en-US)</option>
-          <option value="7">Google UK English Female (en-GB)</option>
-          <option value="8" selected>Google UK English Male (en-GB)</option>
-          <option value="9">Google español (es-ES)</option>
-          <option value="10">Google español de Estados Unidos (es-US)</option>
-          <option value="11">Google français (fr-FR)</option>
-          <option value="12">Google हिन्दी (hi-IN)</option>
-          <option value="13">Google Bahasa Indonesia (id-ID)</option>
-          <option value="14">Google italiano (it-IT)</option>
-          <option value="15">Google 日本語 (ja-JP)</option>
-          <option value="16">Google 한국의 (ko-KR)</option>
-          <option value="17">Google Nederlands (nl-NL)</option>
-          <option value="18">Google polski (pl-PL)</option>
-          <option value="19">Google português do Brasil (pt-BR)</option>
-          <option value="20">Google русский (ru-RU)</option>
-          <option value="21">Google&nbsp;普通话（中国大陆） (zh-CN)</option>
-          <option value="22">Google&nbsp;粤語（香港） (zh-HK)</option>
-          <option value="23">Google 國語（臺灣） (zh-TW)</option>
+          <option selected>Select a voice</option>
         </select>
       </div>
     </div>
 
     <div class="row mt-4 justify-content-center">
-      <div class="col-8">
+      <div class="col-md-10 col-lg-8 col-xl-6">
         <label for="rateInput" class="form-label">Reading Speed:</label>
-        <input type="range" class="form-range" id="rateInput" name="rate" min="0.5" max="1.5" value="1" step="0.5">
-        <output id="rateOutput" class="form-text">1</output>
+        <input type="range" class="form-range" id="rateInput" name="rate" min="0.7" max="1.3" value="1" step="0.3">
+        <div id="rateOutput" class="form-text text-center">Medium</div>
       </div>
     </div>
 

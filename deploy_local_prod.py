@@ -148,7 +148,7 @@ def run_docker_swarm():
 
     print("\nDeploying to the Docker swarm...")
     run_command(
-        f"docker stack deploy --with-registry-auth -c docker-compose.ci.prod.yml {docker_service_name}"
+        f"docker stack deploy --with-registry-auth -c docker-compose.prod.yml {docker_service_name}"
     )
 
     run_command(f"docker pull {IMAGE_PROD_FINAL}")

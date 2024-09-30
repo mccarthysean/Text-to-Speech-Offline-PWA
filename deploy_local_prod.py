@@ -110,10 +110,10 @@ def setup(branch: str = "main") -> None:
     print(f"Current working directory: {os.getcwd()}")
 
     print("\nChecking the environment variable...")
-    GITLAB_DEPLOY_TOKEN = os.getenv("GITLAB_DEPLOY_TOKEN")
-    print(f"GITLAB_DEPLOY_TOKEN = {GITLAB_DEPLOY_TOKEN}")
+    DOCKER_HUB_PASSWORD = os.getenv("DOCKER_HUB_PASSWORD")
+    print(f"DOCKER_HUB_PASSWORD = {DOCKER_HUB_PASSWORD}")
 
-    check_var(GITLAB_DEPLOY_TOKEN, "GITLAB_DEPLOY_TOKEN")
+    check_var(DOCKER_HUB_PASSWORD, "DOCKER_HUB_PASSWORD")
 
     # Login to the Gitlab container registry (with a project-specific token) and download the images
     print("\nLogging into Docker container repo so we can pull and push images...")

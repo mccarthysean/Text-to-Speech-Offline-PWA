@@ -1,6 +1,6 @@
 services:
   text_to_speech:
-    image: "$TEXT_TO_SPEECH_IMAGE_PROD_FINAL"
+    image: "$IMAGE_PROD_FINAL"
     env_file: .env
     environment:
       FLASK_CONFIG: production

@@ -4,9 +4,21 @@
   "name": "Text-to-Speech Dev Container",
   // Use either the Dockerfile or docker-compose.yml to create the Docker container
   // "dockerFile": "Dockerfile",
-  "dockerComposeFile": "docker-compose.dev.yml",
+  "dockerComposeFile": "../docker-compose.dev.yml",
   "service": "text_to_speech_dev",
   "workspaceFolder": "/workspace",
+  "forwardPorts": [
+    5000
+  ],
+  "mounts": [
+    // Mount the local source code into the container (only works in Windows 11)
+    "source=${localWorkspaceFolder},target=/workspace,type=bind"
+  ],
+  // add Docker as a feature, from the Docker outside of Docker image,
+  // to use the Docker CLI from within the container
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
   "customizations": {
     "vscode": {
       "settings": {

@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
       cache_from:
-        - "$TEXT_TO_SPEECH_IMAGE_PROD_FINAL"
+        - "$IMAGE_PROD_FINAL"
       args:
         ENVIRONMENT: production
         # Use Docker BuildKit for better caching and faster builds
@@ -15,4 +15,4 @@ services:
         COMPOSE_DOCKER_CLI_BUILD: 1
         # ERROR: OpenBLAS blas_thread_init if you upgrade from Debian bullseye to bookworm...
         INSTALL_PYTHON_VERSION: 3.12-slim-bullseye
-    image: "$TEXT_TO_SPEECH_IMAGE_PROD_FINAL"
+    image: "$IMAGE_PROD_FINAL"

@@ -36,6 +36,6 @@ secretstorage==3.3.3 ; python_version >= "3.12" and python_version < "4.0" and s
 shellingham==1.5.4 ; python_version >= "3.12" and python_version < "4.0"
 tomlkit==0.13.2 ; python_version >= "3.12" and python_version < "4.0"
 trove-classifiers==2024.7.2 ; python_version >= "3.12" and python_version < "4.0"
-urllib3==2.2.2 ; python_version >= "3.12" and python_version < "4.0"
+urllib3==1.26.15 ; python_version >= "3.12" and python_version < "4.0"
 virtualenv==20.26.3 ; python_version >= "3.12" and python_version < "4.0"
 xattr==1.1.0 ; python_version >= "3.12" and python_version < "4.0" and sys_platform == "darwin"

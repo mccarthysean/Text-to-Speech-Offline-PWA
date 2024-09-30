@@ -150,12 +150,6 @@ def run_docker_swarm():
     run_command(
         f"docker stack deploy --with-registry-auth -c docker-compose.prod.yml {docker_service_name}"
     )
-
-    run_command(f"docker pull {IMAGE_PROD_FINAL}")
-    run_command(
-        f"docker service update --image {IMAGE_PROD_FINAL} --with-registry-auth {docker_service_name}"
-    )
-
     run_command(f"docker stack ps {docker_service_name}")
     run_command("docker service ls")
 

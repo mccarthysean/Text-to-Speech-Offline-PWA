@@ -201,7 +201,7 @@ def main() -> None:
 
     if pull_image.lower() == "y":
         run_command(
-            f"docker pull {IMAGE_PROD_FINAL}", raise_error=False, shell=True
+            f"docker pull {IMAGE_PROD_FINAL} || true", raise_error=False, shell=True
         )
 
     if build_push.lower() == "y":
